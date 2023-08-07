@@ -1,7 +1,5 @@
 import { gql, GraphQLClient } from "graphql-request";
 
-export const username = "cameronslee"
-
 export interface IPinnedItem {
   name: string;
   id: string;
@@ -15,9 +13,11 @@ export interface IPinnedItem {
 
 export class Client {
   static token: string;
+  static username: string;
 	private static client = new GraphQLClient("https://api.github.com/graphql");
-  static init(token: string) {
+  static init(token: string, username: string) {
     this.token = token;
+    this.username = username;
 		this.client.setHeader("Authorization", `Bearer ${token}`);
 	}
 
@@ -27,7 +27,7 @@ export class Client {
     }
     const query = gql`
     {
-      user(login: "${username}") {
+      user(login: "${this.username}") {
         pinnedItems(first: 6) {
           nodes {
             ... on Repository {
