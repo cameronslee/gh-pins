@@ -1,5 +1,7 @@
 # Service to fetch Github Pinned Repos
 
+Uses GraphQL to fetch the repos you have pinned on your GitHub Profile.
+
 # Usage
 
 ## Include in file
